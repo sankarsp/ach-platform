@@ -26,6 +26,8 @@ docker compose up --build
 - Console: http://localhost:8080 (sign in with `sk_ops_demo`)
 - API docs: http://localhost:8000/docs
 
+If a port is already taken on your machine, change `ACH_WEB_HOST_PORT`, `ACH_API_HOST_PORT` or `ACH_DB_HOST_PORT` in `.env`. The database is published on 5433 by default so it doesn't clash with a local PostgreSQL on 5432.
+
 Without Docker (Python 3.12+, Node 22, PostgreSQL 16):
 
 ```bash

@@ -1,7 +1,7 @@
 .PHONY: up down logs test test-pg fmt seed-reset
 
 COMPOSE ?= docker compose
-PG_TEST_URL ?= postgresql+psycopg://ach:ach@localhost:5432/ach
+PG_TEST_URL ?= postgresql+psycopg://ach:ach@localhost:$${ACH_DB_HOST_PORT:-5433}/ach
 
 up: ## Build and start the local stack (UI :8080, API :8000)
 	$(COMPOSE) up -d --build
