@@ -11,3 +11,4 @@ frontend/dist/
 *.tfvars
 !*.tfvars.example
 .DS_Store
+*.tsbuildinfo

@@ -17,6 +17,7 @@ import Originators from "./pages/Originators";
 import CalendarPage from "./pages/Calendar";
 import Incidents from "./pages/Incidents";
 import Audit from "./pages/Audit";
+import Iso20022 from "./pages/Iso20022";
 
 function Guard({ children }: { children: React.ReactNode }) {
   return getSession() ? <>{children}</> : <Navigate to="/login" replace />;
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="payments" element={<Payments />} />
             <Route path="payments/new" element={<NewPayment />} />
             <Route path="originators" element={<Originators />} />
+            <Route path="iso20022" element={<Iso20022 />} />
             <Route path="receiving" element={<Receiving />} />
             <Route path="returns" element={<Returns />} />
             <Route path="files" element={<Files />} />

@@ -28,6 +28,7 @@ export function Layout() {
         <div className="group">Originating</div>
         <NavLink to="/payments" end>Payments {n(c?.held_payments)}</NavLink>
         <NavLink to="/payments/new">New payment</NavLink>
+        <NavLink to="/iso20022">ISO 20022 messages</NavLink>
         <NavLink to="/originators">Originators</NavLink>
         <div className="group">Receiving</div>
         <NavLink to="/receiving">Inbound entries {n(c?.held_inbound)}</NavLink>

@@ -9,7 +9,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from .api import files, ops, parties, payments, rdfi, reference, sandbox
+from .api import files, iso20022, ops, parties, payments, rdfi, reference, sandbox
 from .config import get_settings
 from .db import Base, SessionLocal, get_engine
 from .services.common import DomainError
@@ -76,5 +76,6 @@ def health():
     return {"status": "ok", "env": get_settings().env}
 
 
-for r in (reference.router, parties.router, payments.router, files.router, rdfi.router, ops.router, sandbox.router):
+for r in (reference.router, parties.router, payments.router, files.router, iso20022.router, rdfi.router, ops.router,
+          sandbox.router):
     app.include_router(r)

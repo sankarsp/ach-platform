@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     bank_routing: str = "021000021"
     fed_routing: str = "011000015"            # immediate destination (FedACH)
     fed_name: str = "FEDERAL RESERVE BANK"
+    bank_bic: str = "DEMOUS33XXX"
+    iat_gateway_routing: str = "011000015"     # U.S. gateway for outbound IAT (receiving point for foreign credits)
     rdfi_timezone: str = "America/New_York"
 
     # Risk tuning

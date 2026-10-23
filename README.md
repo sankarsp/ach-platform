@@ -6,12 +6,13 @@ It implements the ACH Program Strategy end to end; see [docs/strategy-traceabili
 
 ## What it does
 
-- **Origination (ODFI / Third-Party Sender).** REST API and Nacha-file channel for PPD, CCD, CTX, WEB, TEL and IAT credits and debits. Every entry is validated against a dated rules catalog, scheduled into a FedACH window, screened, then queued or held.
+- **Origination (ODFI / Third-Party Sender).** REST API, Nacha-file channel and ISO 20022 (pain.001 credit transfers, pain.008 direct debits) for PPD, CCD, CTX, WEB, TEL and IAT credits and debits. Every entry is validated against a dated rules catalog, scheduled into a FedACH window, screened, then queued or held.
 - **Cut-offs, weekends and holidays.** Six FedACH windows with internal cut-offs 45 minutes before each Fed deadline. Settlement dates follow the Federal Reserve (K.8) holiday calendar: a Saturday holiday leaves the Fed open on Friday, a Sunday holiday closes it on Monday. Weekend and holiday effective dates move to the next banking day. Unscheduled closures go through maker-checker approval.
 - **Controls in the path.** OFAC screening (with IAT party data), risk-based fraud monitoring for the 2026 Nacha rules (new payee, recently changed bank details, unvalidated WEB debits, duplicates, velocity, amount anomalies), AML typologies, originator exposure limits and prefunding checks.
 - **Receipt (RDFI).** Automatic R02/R03/R16/R20/R29/R01 returns, debit blocks and filters, credit monitoring that holds funds on suspicious credits, funds availability by window (next-day credits by 9:00 a.m. local from Sept 18, 2026), unauthorized-debit claims with WSUD, and automatic C05 NOCs.
 - **Exceptions.** Inbound returns with deadline and timeliness checks, NOC auto-application, Nacha-permissible reversals within 5 banking days, and return-rate monitoring against the 0.5% / 3% / 15% thresholds.
 - **Money and evidence.** Integer cents, an append-only double-entry ledger, three-way reconciliation (Fed advice, ledger, core) per window, tokenized account numbers, signed webhooks and a full audit log.
+- **ISO 20022 reporting.** pain.002 status reports that track each transaction through settlement and returns, camt.054 debit/credit notifications and camt.053 statements. See [docs/iso20022.md](docs/iso20022.md) for the field mapping and status codes.
 - **Operations.** Scheduler that releases at cut-off and settles, P1/P2/P3 incidents (window at risk or missed, reconciliation breaks, rejected files, return-rate breaches) pushed to your service desk, and a console for the review queue, cases and SAR recording.
 
 ## Run it
@@ -60,7 +61,7 @@ curl -s -X POST localhost:8600/v1/ops/run -H 'Authorization: Bearer sk_ops_demo'
   -H 'Content-Type: application/json' -d '{"force":true}'
 ```
 
-In the console: **Today → Release and settle all**, then open a settled payment to simulate a return or NOC, or go to **Inbound entries → Simulate an inbound file**.
+In the console: **ISO 20022 messages → Submit a message** to load and send a sample pain.001 or pain.008; **Today → Release and settle all**, then open a settled payment to simulate a return or NOC, or go to **Inbound entries → Simulate an inbound file**.
 
 ## Tests
 
@@ -69,7 +70,7 @@ cd backend && python -m pytest -q                                   # SQLite
 ACH_TEST_DATABASE_URL=postgresql+psycopg://ach:ach@localhost:5432/ach_test python -m pytest -q
 ```
 
-The suite covers the Fed calendar (including Saturday- and Sunday-holiday edge cases), window planning, Nacha file round-trips (PPD, CTX, IAT, returns, NOCs, tamper detection) and end-to-end flows through the API.
+The suite covers ISO 20022 intake and reporting (pain.001, pain.008, pain.002, camt.054, camt.053, XML attack rejection), the Fed calendar (including Saturday- and Sunday-holiday edge cases), window planning, Nacha file round-trips (PPD, CTX, IAT, returns, NOCs, tamper detection) and end-to-end flows through the API.
 
 ## Layout
 
@@ -77,6 +78,7 @@ The suite covers the Fed calendar (including Saturday- and Sunday-holiday edge c
 backend/
   app/domain/      fed_calendar.py, windows.py, rules.py   (pure rules; no I/O)
   app/nacha/       record layouts, file builder/parser/validator, IAT/return/NOC builders
+  app/iso20022/    pain.001/pain.008 intake, pain.002/camt.054/camt.053 generation, code mappings, samples
   app/services/    originations, screening, release+settlement, returns, rdfi, ledger,
                    monitoring (ITSM), webhooks, scheduler, sandbox simulator, seed
   app/api/         REST routers

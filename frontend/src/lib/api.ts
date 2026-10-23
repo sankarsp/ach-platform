@@ -52,3 +52,29 @@ export async function api<T = any>(path: string, opts: { method?: string; body?:
 }
 
 export const newKey = () => (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random());
+
+/** Send or fetch raw XML (ISO 20022) with the session's credentials. */
+export async function apiXml(path: string, xml?: string): Promise<string> {
+  const s = getSession();
+  const res = await fetch(`${BASE}${path}`, {
+    method: xml !== undefined ? "POST" : "GET",
+    headers: { "Content-Type": "application/xml", ...(s ? { Authorization: `Bearer ${s.key}`, "X-Actor": s.actor } : {}) },
+    body: xml,
+  });
+  const text = await res.text();
+  if (!res.ok) {
+    let msg = `Request failed (${res.status})`;
+    try { msg = JSON.parse(text).error?.message ?? msg; } catch { /* not JSON */ }
+    throw new ApiError(res.status, "error", msg);
+  }
+  return text;
+}
+
+export function downloadText(name: string, text: string, type = "application/xml") {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}

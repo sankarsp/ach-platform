@@ -427,3 +427,22 @@ class Counter(Base):
     __tablename__ = "counters"
     name: Mapped[str] = mapped_column(String(40), primary_key=True)
     value: Mapped[int] = mapped_column(BigInteger, default=0)
+
+
+class IsoMessage(Base):
+    """ISO 20022 messages received (pain.001/pain.008) and produced (pain.002/camt.054/camt.053)."""
+    __tablename__ = "iso_messages"
+    __table_args__ = (UniqueConstraint("direction", "originator_id", "msg_id"),)
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=uid)
+    direction: Mapped[str] = mapped_column(String(8))            # inbound | outbound
+    msg_type: Mapped[str] = mapped_column(String(20))            # pain.001.001.09, pain.002.001.10, ...
+    msg_id: Mapped[str] = mapped_column(String(35))
+    originator_id: Mapped[str | None] = mapped_column(ForeignKey("originators.id"), nullable=True, index=True)
+    related_id: Mapped[str | None] = mapped_column(String(32), nullable=True, index=True)
+    status: Mapped[str] = mapped_column(String(8), default="ACTC")   # group status (ISO ExternalPaymentGroupStatus)
+    status_reason: Mapped[str | None] = mapped_column(String(140), nullable=True)
+    nb_of_txs: Mapped[int] = mapped_column(Integer, default=0)
+    ctrl_sum_cents: Mapped[int] = mapped_column(BigInteger, default=0)
+    content: Mapped[str] = mapped_column(Text)
+    results: Mapped[list] = mapped_column(JSON, default=list)   # per-transaction outcome at intake
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=utcnow)
