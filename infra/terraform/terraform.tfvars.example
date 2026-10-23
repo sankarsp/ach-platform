@@ -1,0 +1,39 @@
+# Copy to terraform.tfvars and fill in. Do NOT commit terraform.tfvars.
+region      = "us-east-1"
+project     = "ach-platform"
+environment = "production"
+owner       = "payments-engineering"
+cost_center = "payments"
+
+acm_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/00000000-0000-0000-0000-000000000000"
+
+# Immutable image tags pushed to ECR (git SHA recommended)
+backend_image_tag  = "0123abc"
+frontend_image_tag = "0123abc"
+
+# Institution identity written into Nacha headers
+bank_name    = "Example Community Bank"
+bank_routing = "021000021"
+fed_routing  = "011000015"
+
+cors_origins     = "https://ach.example.com"
+itsm_webhook_url = "" # app-level incident webhook
+
+# Capacity
+backend_desired_count  = 2
+backend_max_count      = 6
+frontend_desired_count = 2
+db_instance_class      = "db.m6g.large"
+nat_gateway_per_az     = true # HA egress for production
+
+# Retention
+nacha_archive_retention_days     = 2557 # ~7 years, Object Lock COMPLIANCE (irreversible)
+nacha_archive_glacier_after_days = 90
+log_retention_days               = 400
+db_backup_retention_days         = 35
+
+# Alerting
+alarm_email         = "payments-oncall@example.com"
+itsm_alarm_endpoint = "" # e.g. https://example.service-now.com/api/sn_em_connector/em/inbound_event?source=aws
+
+route_api_via_frontend = true

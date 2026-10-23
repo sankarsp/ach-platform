@@ -1,0 +1,6009 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "ACH Platform API",
+  "description": "Compliance-first ACH origination and receipt: Nacha rules catalog, FedACH windows and Fed holiday calendar, sanctions/fraud/AML screening, double-entry ledger, returns, NOCs, reconciliation and ITSM monitoring. Authenticate with `Authorization: Bearer <api key>`.",
+  "version": "1.0.0"
+ },
+ "paths": {
+  "/health": {
+   "get": {
+    "tags": [
+     "health"
+    ],
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/sec-codes": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Sec Codes",
+    "operationId": "sec_codes_v1_reference_sec_codes_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/use-cases": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Use Cases",
+    "operationId": "use_cases_v1_reference_use_cases_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/return-codes": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Return Codes",
+    "operationId": "return_codes_v1_reference_return_codes_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/noc-codes": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Noc Codes",
+    "operationId": "noc_codes_v1_reference_noc_codes_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/rules": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Rules",
+    "operationId": "rules_v1_reference_rules_get",
+    "parameters": [
+     {
+      "name": "on",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "On"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/windows": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Windows",
+    "operationId": "windows_v1_reference_windows_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/calendar": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Fed Calendar",
+    "operationId": "fed_calendar_v1_reference_calendar_get",
+    "parameters": [
+     {
+      "name": "start",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Start"
+      }
+     },
+     {
+      "name": "end",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "End"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/settlement-preview": {
+   "post": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Settlement Preview",
+    "description": "Which FedACH window an entry would go in and when it would settle, given cut-offs, weekends and holidays.",
+    "operationId": "settlement_preview_v1_reference_settlement_preview_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PreviewIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/reference/business-days": {
+   "get": {
+    "tags": [
+     "reference"
+    ],
+    "summary": "Business Days",
+    "operationId": "business_days_v1_reference_business_days_get",
+    "parameters": [
+     {
+      "name": "start",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "title": "Start"
+      }
+     },
+     {
+      "name": "n",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 2,
+       "title": "N"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/originators": {
+   "post": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Create Originator",
+    "operationId": "create_originator_v1_originators_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/OriginatorIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OriginatorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "List Originators",
+    "operationId": "list_originators_v1_originators_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/originators/{originator_id}": {
+   "get": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Get Originator",
+    "operationId": "get_originator_v1_originators__originator_id__get",
+    "parameters": [
+     {
+      "name": "originator_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Originator Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OriginatorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "patch": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Patch Originator",
+    "operationId": "patch_originator_v1_originators__originator_id__patch",
+    "parameters": [
+     {
+      "name": "originator_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Originator Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/OriginatorPatch"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OriginatorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/originators/{originator_id}/return-rates": {
+   "get": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Originator Return Rates",
+    "operationId": "originator_return_rates_v1_originators__originator_id__return_rates_get",
+    "parameters": [
+     {
+      "name": "originator_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Originator Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/counterparties": {
+   "post": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Create Counterparty",
+    "operationId": "create_counterparty_v1_counterparties_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CounterpartyIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CounterpartyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "List Counterparties",
+    "operationId": "list_counterparties_v1_counterparties_get",
+    "parameters": [
+     {
+      "name": "originator_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Originator Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CounterpartyOut"
+         },
+         "title": "Response List Counterparties V1 Counterparties Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/counterparties/{counterparty_id}": {
+   "get": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Get Counterparty",
+    "operationId": "get_counterparty_v1_counterparties__counterparty_id__get",
+    "parameters": [
+     {
+      "name": "counterparty_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Counterparty Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CounterpartyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/counterparties/{counterparty_id}/account": {
+   "put": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Change Account",
+    "description": "Change bank details. Triggers re-validation and the 10-day 'changed account' fraud signal.",
+    "operationId": "change_account_v1_counterparties__counterparty_id__account_put",
+    "parameters": [
+     {
+      "name": "counterparty_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Counterparty Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AccountChangeIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CounterpartyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/counterparties/{counterparty_id}/validate": {
+   "post": {
+    "tags": [
+     "originators & counterparties"
+    ],
+    "summary": "Validate",
+    "operationId": "validate_v1_counterparties__counterparty_id__validate_post",
+    "parameters": [
+     {
+      "name": "counterparty_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Counterparty Id"
+      }
+     },
+     {
+      "name": "method",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "instant",
+       "title": "Method"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CounterpartyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments": {
+   "post": {
+    "tags": [
+     "payments"
+    ],
+    "summary": "Create an ACH credit or debit",
+    "description": "Validates against the Nacha rules catalog, plans the FedACH window and settlement date, screens sanctions/fraud/AML, then warehouses or holds the entry. Requires Idempotency-Key.",
+    "operationId": "create_v1_payments_post",
+    "parameters": [
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "maxLength": 120,
+       "title": "Idempotency-Key"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PaymentIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaymentOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "payments"
+    ],
+    "summary": "List Payments",
+    "operationId": "list_payments_v1_payments_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "originator_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Originator Id"
+      }
+     },
+     {
+      "name": "sec_code",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Sec Code"
+      }
+     },
+     {
+      "name": "window",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Window"
+      }
+     },
+     {
+      "name": "settlement_date",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Settlement Date"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 500,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 0,
+       "title": "Offset"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/PaymentOut"
+         },
+         "title": "Response List Payments V1 Payments Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment_id}": {
+   "get": {
+    "tags": [
+     "payments"
+    ],
+    "summary": "Get Payment",
+    "operationId": "get_payment_v1_payments__payment_id__get",
+    "parameters": [
+     {
+      "name": "payment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Payment Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment_id}/cancel": {
+   "post": {
+    "tags": [
+     "payments"
+    ],
+    "summary": "Cancel",
+    "operationId": "cancel_v1_payments__payment_id__cancel_post",
+    "parameters": [
+     {
+      "name": "payment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Payment Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaymentOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment_id}/reversal": {
+   "post": {
+    "tags": [
+     "payments"
+    ],
+    "summary": "Reversal",
+    "description": "Nacha-permissible reversal (duplicate, wrong receiver, wrong amount, wrong date) within 5 banking days.",
+    "operationId": "reversal_v1_payments__payment_id__reversal_post",
+    "parameters": [
+     {
+      "name": "payment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Payment Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReversalIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaymentOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment_id}/decision": {
+   "post": {
+    "tags": [
+     "payments"
+    ],
+    "summary": "Decide",
+    "description": "Operator: release or reject a held payment. Closes its open alerts.",
+    "operationId": "decide_v1_payments__payment_id__decision_post",
+    "parameters": [
+     {
+      "name": "payment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Payment Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecisionIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaymentOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/files": {
+   "get": {
+    "tags": [
+     "files"
+    ],
+    "summary": "List Files",
+    "operationId": "list_files_v1_files_get",
+    "parameters": [
+     {
+      "name": "direction",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Direction"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/files/{file_id}": {
+   "get": {
+    "tags": [
+     "files"
+    ],
+    "summary": "Get File",
+    "operationId": "get_file_v1_files__file_id__get",
+    "parameters": [
+     {
+      "name": "file_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "File Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/files/{file_id}/raw": {
+   "get": {
+    "tags": [
+     "files"
+    ],
+    "summary": "Raw",
+    "operationId": "raw_v1_files__file_id__raw_get",
+    "parameters": [
+     {
+      "name": "file_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "File Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/files/inbound": {
+   "post": {
+    "tags": [
+     "files"
+    ],
+    "summary": "Inbound",
+    "description": "Ingest a file received from FedACH: forward entries (RDFI), returns and NOCs (ODFI).",
+    "operationId": "inbound_v1_files_inbound_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/FileIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/files/validate": {
+   "post": {
+    "tags": [
+     "files"
+    ],
+    "summary": "Validate",
+    "description": "Validate a Nacha file without processing it.",
+    "operationId": "validate_v1_files_validate_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/FileIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/files/originate": {
+   "post": {
+    "tags": [
+     "files"
+    ],
+    "summary": "Originate",
+    "description": "Originator file channel: submit a Nacha file; each entry becomes a payment through the same controls as the API.",
+    "operationId": "originate_v1_files_originate_post",
+    "parameters": [
+     {
+      "name": "originator_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Originator Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/FileIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/entries": {
+   "get": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Entries",
+    "operationId": "entries_v1_rdfi_entries_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 200,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/entries/{entry_id}": {
+   "get": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Entry",
+    "operationId": "entry_v1_rdfi_entries__entry_id__get",
+    "parameters": [
+     {
+      "name": "entry_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Entry Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/entries/{entry_id}/decision": {
+   "post": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Decide",
+    "description": "Release or return a held inbound entry (credit monitoring / sanctions).",
+    "operationId": "decide_v1_rdfi_entries__entry_id__decision_post",
+    "parameters": [
+     {
+      "name": "entry_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Entry Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InboundDecisionIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/entries/{entry_id}/unauthorized": {
+   "post": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Unauthorized",
+    "description": "Customer dispute: re-credit and return R05/R07/R10/R11 (consumer, WSUD) or R29 (business).",
+    "operationId": "unauthorized_v1_rdfi_entries__entry_id__unauthorized_post",
+    "parameters": [
+     {
+      "name": "entry_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Entry Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UnauthorizedClaimIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/entries/{entry_id}/noc": {
+   "post": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Noc",
+    "description": "Originate a Notification of Change to the ODFI.",
+    "operationId": "noc_v1_rdfi_entries__entry_id__noc_post",
+    "parameters": [
+     {
+      "name": "entry_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Entry Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NocIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/accounts": {
+   "get": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Accounts",
+    "operationId": "accounts_v1_rdfi_accounts_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Create Account",
+    "operationId": "create_account_v1_rdfi_accounts_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CoreAccountIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/rdfi/accounts/{account_id}": {
+   "patch": {
+    "tags": [
+     "RDFI (receiving)"
+    ],
+    "summary": "Patch Account",
+    "operationId": "patch_account_v1_rdfi_accounts__account_id__patch",
+    "parameters": [
+     {
+      "name": "account_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Account Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CoreAccountPatch"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/ops/dashboard": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Dashboard",
+    "operationId": "dashboard_v1_ops_dashboard_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/ops/run": {
+   "post": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Run",
+    "description": "Run the operations cycle now: release due windows, settle, monitor, deliver webhooks.",
+    "operationId": "run_v1_ops_run_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RunIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/alerts": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Alerts",
+    "operationId": "alerts_v1_alerts_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": "open,escalated",
+       "title": "Status"
+      }
+     },
+     {
+      "name": "kind",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Kind"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 200,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/alerts/{alert_id}": {
+   "patch": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Update Alert",
+    "operationId": "update_alert_v1_alerts__alert_id__patch",
+    "parameters": [
+     {
+      "name": "alert_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Alert Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AlertUpdateIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/cases": {
+   "post": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Create Case",
+    "operationId": "create_case_v1_cases_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CaseIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Cases",
+    "operationId": "cases_v1_cases_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/cases/{case_id}": {
+   "patch": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Update Case",
+    "operationId": "update_case_v1_cases__case_id__patch",
+    "parameters": [
+     {
+      "name": "case_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Case Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CaseUpdateIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/incidents": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Incidents",
+    "operationId": "incidents_v1_incidents_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/incidents/{incident_id}": {
+   "patch": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Update Incident",
+    "operationId": "update_incident_v1_incidents__incident_id__patch",
+    "parameters": [
+     {
+      "name": "incident_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Incident Id"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/IncidentUpdateIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/returns": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Returns",
+    "operationId": "returns_v1_returns_get",
+    "parameters": [
+     {
+      "name": "direction",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Direction"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 200,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/nocs": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Nocs",
+    "operationId": "nocs_v1_nocs_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/settlements": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Settlements",
+    "operationId": "settlements_v1_settlements_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/ledger/trial-balance": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Trial Balance",
+    "operationId": "trial_balance_v1_ledger_trial_balance_get",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/calendar/overrides": {
+   "post": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Request Override",
+    "operationId": "request_override_v1_calendar_overrides_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CalendarOverrideIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/calendar/overrides/{day}/approve": {
+   "post": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Approve Override",
+    "operationId": "approve_override_v1_calendar_overrides__day__approve_post",
+    "parameters": [
+     {
+      "name": "day",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Day"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/webhooks": {
+   "post": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Create Webhook",
+    "operationId": "create_webhook_v1_webhooks_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WebhookIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/webhooks/events": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Webhook Events",
+    "operationId": "webhook_events_v1_webhooks_events_get",
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 500,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/audit": {
+   "get": {
+    "tags": [
+     "operations"
+    ],
+    "summary": "Audit Log",
+    "operationId": "audit_log_v1_audit_get",
+    "parameters": [
+     {
+      "name": "entity",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Entity"
+      }
+     },
+     {
+      "name": "entity_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Entity Id"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "default": 200,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/sandbox/returns": {
+   "post": {
+    "tags": [
+     "sandbox (FedACH simulator)"
+    ],
+    "summary": "Sim Return",
+    "description": "Simulate the RDFI returning one of our transmitted payments.",
+    "operationId": "sim_return_v1_sandbox_returns_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SimReturnIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/sandbox/nocs": {
+   "post": {
+    "tags": [
+     "sandbox (FedACH simulator)"
+    ],
+    "summary": "Sim Noc",
+    "description": "Simulate the RDFI sending a Notification of Change.",
+    "operationId": "sim_noc_v1_sandbox_nocs_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SimNocIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/sandbox/inbound": {
+   "post": {
+    "tags": [
+     "sandbox (FedACH simulator)"
+    ],
+    "summary": "Sim Inbound",
+    "description": "Simulate FedACH delivering forward entries to our customers (RDFI flow).",
+    "operationId": "sim_inbound_v1_sandbox_inbound_post",
+    "parameters": [
+     {
+      "name": "authorization",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "",
+       "title": "Authorization"
+      }
+     },
+     {
+      "name": "x-actor",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "X-Actor"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SimInboundIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AccountChangeIn": {
+    "properties": {
+     "routing_number": {
+      "type": "string",
+      "title": "Routing Number"
+     },
+     "account_number": {
+      "type": "string",
+      "title": "Account Number"
+     }
+    },
+    "type": "object",
+    "required": [
+     "routing_number",
+     "account_number"
+    ],
+    "title": "AccountChangeIn"
+   },
+   "AlertUpdateIn": {
+    "properties": {
+     "status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "open",
+         "escalated",
+         "closed"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "assignee": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Assignee"
+     },
+     "disposition": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "no_action",
+         "escalated_to_case",
+         "false_positive",
+         "true_positive"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Disposition"
+     },
+     "note": {
+      "type": "string",
+      "title": "Note",
+      "default": ""
+     },
+     "case_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Case Id"
+     }
+    },
+    "type": "object",
+    "title": "AlertUpdateIn"
+   },
+   "CalendarOverrideIn": {
+    "properties": {
+     "day": {
+      "type": "string",
+      "format": "date",
+      "title": "Day"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "closure",
+       "opening"
+      ],
+      "title": "Kind"
+     },
+     "note": {
+      "type": "string",
+      "title": "Note"
+     }
+    },
+    "type": "object",
+    "required": [
+     "day",
+     "kind",
+     "note"
+    ],
+    "title": "CalendarOverrideIn"
+   },
+   "CaseIn": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subject": {
+      "type": "string",
+      "title": "Subject",
+      "default": ""
+     },
+     "alert_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Alert Ids",
+      "default": []
+     }
+    },
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "title": "CaseIn"
+   },
+   "CaseUpdateIn": {
+    "properties": {
+     "note": {
+      "type": "string",
+      "title": "Note",
+      "default": ""
+     },
+     "action": {
+      "type": "string",
+      "enum": [
+       "note",
+       "file_sar",
+       "close"
+      ],
+      "title": "Action",
+      "default": "note"
+     },
+     "sar_reference": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sar Reference"
+     }
+    },
+    "type": "object",
+    "title": "CaseUpdateIn"
+   },
+   "CoreAccountIn": {
+    "properties": {
+     "account_number": {
+      "type": "string",
+      "title": "Account Number"
+     },
+     "owner_name": {
+      "type": "string",
+      "title": "Owner Name"
+     },
+     "owner_type": {
+      "type": "string",
+      "enum": [
+       "consumer",
+       "business"
+      ],
+      "title": "Owner Type",
+      "default": "consumer"
+     },
+     "account_type": {
+      "type": "string",
+      "enum": [
+       "checking",
+       "savings"
+      ],
+      "title": "Account Type",
+      "default": "checking"
+     },
+     "balance_cents": {
+      "type": "integer",
+      "title": "Balance Cents",
+      "default": 0
+     },
+     "debit_block": {
+      "type": "boolean",
+      "title": "Debit Block",
+      "default": false
+     },
+     "allowed_debit_company_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Allowed Debit Company Ids",
+      "default": []
+     }
+    },
+    "type": "object",
+    "required": [
+     "account_number",
+     "owner_name"
+    ],
+    "title": "CoreAccountIn"
+   },
+   "CoreAccountPatch": {
+    "properties": {
+     "status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "open",
+         "closed",
+         "frozen"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "debit_block": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Debit Block"
+     },
+     "allowed_debit_company_ids": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Allowed Debit Company Ids"
+     }
+    },
+    "type": "object",
+    "title": "CoreAccountPatch"
+   },
+   "CounterpartyIn": {
+    "properties": {
+     "originator_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Originator Id"
+     },
+     "name": {
+      "type": "string",
+      "maxLength": 120,
+      "title": "Name"
+     },
+     "party_type": {
+      "type": "string",
+      "enum": [
+       "consumer",
+       "business"
+      ],
+      "title": "Party Type",
+      "default": "consumer"
+     },
+     "routing_number": {
+      "type": "string",
+      "maxLength": 34,
+      "minLength": 8,
+      "title": "Routing Number"
+     },
+     "account_number": {
+      "type": "string",
+      "maxLength": 35,
+      "minLength": 1,
+      "title": "Account Number"
+     },
+     "account_type": {
+      "type": "string",
+      "enum": [
+       "checking",
+       "savings",
+       "gl",
+       "loan"
+      ],
+      "title": "Account Type",
+      "default": "checking"
+     },
+     "individual_id": {
+      "type": "string",
+      "maxLength": 15,
+      "title": "Individual Id",
+      "default": ""
+     },
+     "country": {
+      "type": "string",
+      "maxLength": 2,
+      "minLength": 2,
+      "title": "Country",
+      "default": "US"
+     },
+     "address": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Address",
+      "default": {}
+     },
+     "validate_with": {
+      "type": "string",
+      "enum": [
+       "instant",
+       "prenote",
+       "none"
+      ],
+      "title": "Validate With",
+      "default": "instant"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "routing_number",
+     "account_number"
+    ],
+    "title": "CounterpartyIn"
+   },
+   "CounterpartyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "originator_id": {
+      "type": "string",
+      "title": "Originator Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "party_type": {
+      "type": "string",
+      "title": "Party Type"
+     },
+     "routing_number": {
+      "type": "string",
+      "title": "Routing Number"
+     },
+     "account_last4": {
+      "type": "string",
+      "title": "Account Last4"
+     },
+     "account_type": {
+      "type": "string",
+      "title": "Account Type"
+     },
+     "country": {
+      "type": "string",
+      "title": "Country"
+     },
+     "validation_status": {
+      "type": "string",
+      "title": "Validation Status"
+     },
+     "validation_method": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Validation Method"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "block_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Block Reason"
+     },
+     "account_changed_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Account Changed At"
+     },
+     "first_paid_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "First Paid At"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "originator_id",
+     "name",
+     "party_type",
+     "routing_number",
+     "account_last4",
+     "account_type",
+     "country",
+     "validation_status",
+     "validation_method",
+     "status",
+     "block_reason",
+     "account_changed_at",
+     "first_paid_at",
+     "created_at"
+    ],
+    "title": "CounterpartyOut"
+   },
+   "DecisionIn": {
+    "properties": {
+     "decision": {
+      "type": "string",
+      "enum": [
+       "approve",
+       "reject"
+      ],
+      "title": "Decision"
+     },
+     "note": {
+      "type": "string",
+      "title": "Note",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "required": [
+     "decision"
+    ],
+    "title": "DecisionIn"
+   },
+   "FileIn": {
+    "properties": {
+     "content": {
+      "type": "string",
+      "title": "Content",
+      "description": "Raw Nacha file text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "content"
+    ],
+    "title": "FileIn"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "IatIn": {
+    "properties": {
+     "transaction_type": {
+      "type": "string",
+      "title": "Transaction Type",
+      "description": "e.g. BUS, SAL, ANN, PEN, MIS"
+     },
+     "destination_country": {
+      "type": "string",
+      "title": "Destination Country"
+     },
+     "destination_currency": {
+      "type": "string",
+      "title": "Destination Currency",
+      "default": "USD"
+     },
+     "originator": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Originator",
+      "default": {}
+     },
+     "receiver": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Receiver"
+     },
+     "rdfi": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Rdfi"
+     }
+    },
+    "type": "object",
+    "required": [
+     "transaction_type",
+     "destination_country",
+     "receiver",
+     "rdfi"
+    ],
+    "title": "IatIn"
+   },
+   "InboundDecisionIn": {
+    "properties": {
+     "decision": {
+      "type": "string",
+      "enum": [
+       "release",
+       "return"
+      ],
+      "title": "Decision"
+     },
+     "note": {
+      "type": "string",
+      "title": "Note",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "required": [
+     "decision"
+    ],
+    "title": "InboundDecisionIn"
+   },
+   "IncidentUpdateIn": {
+    "properties": {
+     "action": {
+      "type": "string",
+      "enum": [
+       "acknowledge",
+       "resolve"
+      ],
+      "title": "Action"
+     },
+     "note": {
+      "type": "string",
+      "title": "Note",
+      "default": ""
+     }
+    },
+    "type": "object",
+    "required": [
+     "action"
+    ],
+    "title": "IncidentUpdateIn"
+   },
+   "NocIn": {
+    "properties": {
+     "change_code": {
+      "type": "string",
+      "title": "Change Code"
+     },
+     "corrected_data": {
+      "type": "string",
+      "maxLength": 29,
+      "title": "Corrected Data"
+     }
+    },
+    "type": "object",
+    "required": [
+     "change_code",
+     "corrected_data"
+    ],
+    "title": "NocIn"
+   },
+   "OriginatorIn": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "maxLength": 120,
+      "title": "Name"
+     },
+     "company_id": {
+      "type": "string",
+      "pattern": "^[0-9A-Z]{10}$",
+      "title": "Company Id",
+      "description": "10-character Nacha company identification"
+     },
+     "allowed_sec_codes": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Allowed Sec Codes",
+      "default": [
+       "PPD",
+       "CCD"
+      ]
+     },
+     "allows_debits": {
+      "type": "boolean",
+      "title": "Allows Debits",
+      "default": false
+     },
+     "same_day_enabled": {
+      "type": "boolean",
+      "title": "Same Day Enabled",
+      "default": true
+     },
+     "daily_limit_cents": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Daily Limit Cents",
+      "default": 100000000
+     },
+     "per_entry_limit_cents": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Per Entry Limit Cents",
+      "default": 25000000
+     },
+     "risk_rating": {
+      "type": "string",
+      "enum": [
+       "low",
+       "medium",
+       "high"
+      ],
+      "title": "Risk Rating",
+      "default": "medium"
+     },
+     "is_third_party_sender": {
+      "type": "boolean",
+      "title": "Is Third Party Sender",
+      "default": false
+     },
+     "settlement_account_number": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Settlement Account Number"
+     },
+     "kyb_status": {
+      "type": "string",
+      "enum": [
+       "pending",
+       "approved",
+       "rejected"
+      ],
+      "title": "Kyb Status",
+      "default": "pending"
+     },
+     "agreement_signed_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Agreement Signed At"
+     },
+     "address": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Address",
+      "default": {}
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "company_id"
+    ],
+    "title": "OriginatorIn"
+   },
+   "OriginatorOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "kyb_status": {
+      "type": "string",
+      "title": "Kyb Status"
+     },
+     "risk_rating": {
+      "type": "string",
+      "title": "Risk Rating"
+     },
+     "is_third_party_sender": {
+      "type": "boolean",
+      "title": "Is Third Party Sender"
+     },
+     "allowed_sec_codes": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Allowed Sec Codes"
+     },
+     "allows_debits": {
+      "type": "boolean",
+      "title": "Allows Debits"
+     },
+     "same_day_enabled": {
+      "type": "boolean",
+      "title": "Same Day Enabled"
+     },
+     "daily_limit_cents": {
+      "type": "integer",
+      "title": "Daily Limit Cents"
+     },
+     "per_entry_limit_cents": {
+      "type": "integer",
+      "title": "Per Entry Limit Cents"
+     },
+     "settlement_account_number": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Settlement Account Number"
+     },
+     "agreement_signed_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Agreement Signed At"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "company_id",
+     "status",
+     "kyb_status",
+     "risk_rating",
+     "is_third_party_sender",
+     "allowed_sec_codes",
+     "allows_debits",
+     "same_day_enabled",
+     "daily_limit_cents",
+     "per_entry_limit_cents",
+     "settlement_account_number",
+     "agreement_signed_at",
+     "created_at"
+    ],
+    "title": "OriginatorOut"
+   },
+   "OriginatorPatch": {
+    "properties": {
+     "allowed_sec_codes": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Allowed Sec Codes"
+     },
+     "allows_debits": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Allows Debits"
+     },
+     "same_day_enabled": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Same Day Enabled"
+     },
+     "daily_limit_cents": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "exclusiveMinimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Daily Limit Cents"
+     },
+     "per_entry_limit_cents": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "exclusiveMinimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Per Entry Limit Cents"
+     },
+     "risk_rating": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "low",
+         "medium",
+         "high"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Risk Rating"
+     },
+     "status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "active",
+         "suspended"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "kyb_status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "pending",
+         "approved",
+         "rejected"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Kyb Status"
+     },
+     "agreement_signed_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Agreement Signed At"
+     }
+    },
+    "type": "object",
+    "title": "OriginatorPatch"
+   },
+   "PaymentIn": {
+    "properties": {
+     "originator_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Originator Id"
+     },
+     "counterparty_id": {
+      "type": "string",
+      "title": "Counterparty Id"
+     },
+     "amount_cents": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Amount Cents"
+     },
+     "direction": {
+      "type": "string",
+      "enum": [
+       "credit",
+       "debit"
+      ],
+      "title": "Direction"
+     },
+     "sec_code": {
+      "type": "string",
+      "enum": [
+       "PPD",
+       "CCD",
+       "CTX",
+       "WEB",
+       "TEL",
+       "IAT"
+      ],
+      "title": "Sec Code"
+     },
+     "effective_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Date"
+     },
+     "purpose": {
+      "type": "string",
+      "title": "Purpose",
+      "default": "other"
+     },
+     "company_entry_description": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 10
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company Entry Description"
+     },
+     "same_day": {
+      "type": "boolean",
+      "title": "Same Day",
+      "default": false
+     },
+     "addenda": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Addenda",
+      "default": []
+     },
+     "web_payment_type": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "R",
+         "S"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Web Payment Type"
+     },
+     "iat": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/IatIn"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "metadata": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Metadata",
+      "default": {}
+     }
+    },
+    "type": "object",
+    "required": [
+     "counterparty_id",
+     "amount_cents",
+     "direction",
+     "sec_code",
+     "effective_date"
+    ],
+    "title": "PaymentIn"
+   },
+   "PaymentOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "originator_id": {
+      "type": "string",
+      "title": "Originator Id"
+     },
+     "counterparty_id": {
+      "type": "string",
+      "title": "Counterparty Id"
+     },
+     "direction": {
+      "type": "string",
+      "title": "Direction"
+     },
+     "sec_code": {
+      "type": "string",
+      "title": "Sec Code"
+     },
+     "purpose": {
+      "type": "string",
+      "title": "Purpose"
+     },
+     "amount_cents": {
+      "type": "integer",
+      "title": "Amount Cents"
+     },
+     "company_entry_description": {
+      "type": "string",
+      "title": "Company Entry Description"
+     },
+     "transaction_code": {
+      "type": "string",
+      "title": "Transaction Code"
+     },
+     "requested_effective_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Requested Effective Date"
+     },
+     "effective_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Date"
+     },
+     "same_day_requested": {
+      "type": "boolean",
+      "title": "Same Day Requested"
+     },
+     "same_day": {
+      "type": "boolean",
+      "title": "Same Day"
+     },
+     "window_code": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Window Code"
+     },
+     "window_cutoff_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Window Cutoff At"
+     },
+     "expected_settlement_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expected Settlement At"
+     },
+     "settlement_date": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Settlement Date"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "status_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status Reason"
+     },
+     "plan_notes": {
+      "items": {},
+      "type": "array",
+      "title": "Plan Notes"
+     },
+     "risk_score": {
+      "type": "integer",
+      "title": "Risk Score"
+     },
+     "trace_number": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Trace Number"
+     },
+     "file_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "File Id"
+     },
+     "return_code": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Return Code"
+     },
+     "reversal_of_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reversal Of Id"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "transmitted_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Transmitted At"
+     },
+     "settled_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Settled At"
+     },
+     "returned_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Returned At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "originator_id",
+     "counterparty_id",
+     "direction",
+     "sec_code",
+     "purpose",
+     "amount_cents",
+     "company_entry_description",
+     "transaction_code",
+     "requested_effective_date",
+     "effective_date",
+     "same_day_requested",
+     "same_day",
+     "window_code",
+     "window_cutoff_at",
+     "expected_settlement_at",
+     "settlement_date",
+     "status",
+     "status_reason",
+     "plan_notes",
+     "risk_score",
+     "trace_number",
+     "file_id",
+     "return_code",
+     "reversal_of_id",
+     "created_at",
+     "transmitted_at",
+     "settled_at",
+     "returned_at"
+    ],
+    "title": "PaymentOut"
+   },
+   "PreviewIn": {
+    "properties": {
+     "effective_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Date"
+     },
+     "sec_code": {
+      "type": "string",
+      "title": "Sec Code",
+      "default": "PPD"
+     },
+     "amount_cents": {
+      "type": "integer",
+      "title": "Amount Cents",
+      "default": 10000
+     },
+     "same_day": {
+      "type": "boolean",
+      "title": "Same Day",
+      "default": false
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "effective_date"
+    ],
+    "title": "PreviewIn"
+   },
+   "ReversalIn": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "enum": [
+       "duplicate",
+       "wrong_receiver",
+       "wrong_amount",
+       "wrong_date"
+      ],
+      "title": "Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason"
+    ],
+    "title": "ReversalIn"
+   },
+   "RunIn": {
+    "properties": {
+     "force": {
+      "type": "boolean",
+      "title": "Force",
+      "description": "Sandbox only: release and settle immediately, ignoring cut-offs",
+      "default": false
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At",
+      "description": "Sandbox only: run as if at this time"
+     }
+    },
+    "type": "object",
+    "title": "RunIn"
+   },
+   "SimInboundIn": {
+    "properties": {
+     "entries": {
+      "items": {
+       "$ref": "#/components/schemas/SimInboundItem"
+      },
+      "type": "array",
+      "title": "Entries"
+     }
+    },
+    "type": "object",
+    "required": [
+     "entries"
+    ],
+    "title": "SimInboundIn"
+   },
+   "SimInboundItem": {
+    "properties": {
+     "account_number": {
+      "type": "string",
+      "title": "Account Number"
+     },
+     "amount_cents": {
+      "type": "integer",
+      "minimum": 0.0,
+      "title": "Amount Cents"
+     },
+     "direction": {
+      "type": "string",
+      "enum": [
+       "credit",
+       "debit"
+      ],
+      "title": "Direction",
+      "default": "credit"
+     },
+     "sec_code": {
+      "type": "string",
+      "enum": [
+       "PPD",
+       "CCD",
+       "WEB",
+       "TEL"
+      ],
+      "title": "Sec Code",
+      "default": "PPD"
+     },
+     "company_name": {
+      "type": "string",
+      "title": "Company Name",
+      "default": "Outside Co"
+     },
+     "company_id": {
+      "type": "string",
+      "title": "Company Id",
+      "default": "9876543210"
+     },
+     "entry_description": {
+      "type": "string",
+      "title": "Entry Description",
+      "default": "PAYMENT"
+     },
+     "individual_name": {
+      "type": "string",
+      "title": "Individual Name",
+      "default": ""
+     },
+     "account_type": {
+      "type": "string",
+      "enum": [
+       "checking",
+       "savings"
+      ],
+      "title": "Account Type",
+      "default": "checking"
+     },
+     "same_day_window": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "SD1",
+         "SD2",
+         "SD3"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Same Day Window"
+     }
+    },
+    "type": "object",
+    "required": [
+     "account_number",
+     "amount_cents"
+    ],
+    "title": "SimInboundItem"
+   },
+   "SimNocIn": {
+    "properties": {
+     "payment_id": {
+      "type": "string",
+      "title": "Payment Id"
+     },
+     "change_code": {
+      "type": "string",
+      "title": "Change Code"
+     },
+     "corrected_data": {
+      "type": "string",
+      "title": "Corrected Data"
+     }
+    },
+    "type": "object",
+    "required": [
+     "payment_id",
+     "change_code",
+     "corrected_data"
+    ],
+    "title": "SimNocIn"
+   },
+   "SimReturnIn": {
+    "properties": {
+     "payment_id": {
+      "type": "string",
+      "title": "Payment Id"
+     },
+     "return_code": {
+      "type": "string",
+      "title": "Return Code"
+     }
+    },
+    "type": "object",
+    "required": [
+     "payment_id",
+     "return_code"
+    ],
+    "title": "SimReturnIn"
+   },
+   "UnauthorizedClaimIn": {
+    "properties": {
+     "return_code": {
+      "type": "string",
+      "enum": [
+       "R05",
+       "R07",
+       "R10",
+       "R11",
+       "R29"
+      ],
+      "title": "Return Code"
+     },
+     "wsud_on_file": {
+      "type": "boolean",
+      "title": "Wsud On File",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "return_code"
+    ],
+    "title": "UnauthorizedClaimIn"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "WebhookIn": {
+    "properties": {
+     "originator_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Originator Id"
+     },
+     "url": {
+      "type": "string",
+      "title": "Url"
+     },
+     "events": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Events",
+      "default": [
+       "*"
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "url"
+    ],
+    "title": "WebhookIn"
+   }
+  }
+ }
+}
