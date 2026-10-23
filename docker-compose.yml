@@ -1,5 +1,7 @@
 # Local sandbox stack: Postgres + FastAPI backend (with scheduler) + nginx-served SPA.
-#   make up      -> http://localhost:8080 (UI, API at /api)  |  http://localhost:8000/docs (API direct)
+#   make up      -> http://localhost:8686 (UI, API at /api)  |  http://localhost:8600/docs (API direct)
+#   Host ports default to uncommon values so they do not clash with Jenkins (8080), other dev servers (8000)
+#   or a local PostgreSQL (5432). Override with ACH_WEB_HOST_PORT / ACH_API_HOST_PORT / ACH_DB_HOST_PORT in .env.
 name: ach-platform
 
 services:
@@ -35,13 +37,13 @@ services:
       ACH_SCHEDULER_ENABLED: "true"
       ACH_SCHEDULER_INTERVAL_SECONDS: ${ACH_SCHEDULER_INTERVAL_SECONDS:-60}
       ACH_SEED_DEMO_DATA: ${ACH_SEED_DEMO_DATA:-true}
-      ACH_CORS_ORIGINS: http://localhost:8080,http://localhost:5173
+      ACH_CORS_ORIGINS: http://localhost:${ACH_WEB_HOST_PORT:-8686},http://localhost:5173
       ACH_ITSM_WEBHOOK_URL: ${ACH_ITSM_WEBHOOK_URL:-}
     depends_on:
       db:
         condition: service_healthy
     ports:
-      - "${ACH_API_HOST_PORT:-8000}:8000"
+      - "${ACH_API_HOST_PORT:-8600}:8000"
 
   frontend:
     build:
@@ -53,7 +55,7 @@ services:
       backend:
         condition: service_started
     ports:
-      - "${ACH_WEB_HOST_PORT:-8080}:80"
+      - "${ACH_WEB_HOST_PORT:-8686}:80"
 
 volumes:
   pgdata:

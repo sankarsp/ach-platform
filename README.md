@@ -23,16 +23,16 @@ cp .env.example .env
 docker compose up --build
 ```
 
-- Console: http://localhost:8080 (sign in with `sk_ops_demo`)
-- API docs: http://localhost:8000/docs
+- Console: http://localhost:8686 (sign in with `sk_ops_demo`)
+- API docs: http://localhost:8600/docs
 
-If a port is already taken on your machine, change `ACH_WEB_HOST_PORT`, `ACH_API_HOST_PORT` or `ACH_DB_HOST_PORT` in `.env`. The database is published on 5433 by default so it doesn't clash with a local PostgreSQL on 5432.
+If a port is already taken on your machine, change `ACH_WEB_HOST_PORT`, `ACH_API_HOST_PORT` or `ACH_DB_HOST_PORT` in `.env`. Defaults are deliberately uncommon (console 8686, API 8600, database 5433) so they don't clash with Jenkins on 8080, another dev server on 8000, or a local PostgreSQL on 5432.
 
 Without Docker (Python 3.12+, Node 22, PostgreSQL 16):
 
 ```bash
 cd backend && pip install -r requirements-dev.txt
-ACH_DATABASE_URL=postgresql+psycopg://ach:ach@localhost:5432/ach uvicorn app.main:app --reload
+ACH_DATABASE_URL=postgresql+psycopg://ach:ach@localhost:5432/ach uvicorn app.main:app --reload --port 8600
 cd frontend && npm install && npm run dev        # http://localhost:5173
 ```
 
@@ -52,11 +52,11 @@ The sandbox seeds three originators (a payroll company, a utility, a supplier), 
 
 ```bash
 # When would a payroll file dated Monday July 5, 2027 settle? (Fed closed: Independence Day observed)
-curl -s localhost:8000/v1/reference/settlement-preview -H 'Authorization: Bearer sk_acme_demo' \
+curl -s localhost:8600/v1/reference/settlement-preview -H 'Authorization: Bearer sk_acme_demo' \
   -H 'Content-Type: application/json' -d '{"effective_date":"2027-07-05","sec_code":"PPD"}'
 
 # Release everything queued and settle it now (sandbox only)
-curl -s -X POST localhost:8000/v1/ops/run -H 'Authorization: Bearer sk_ops_demo' \
+curl -s -X POST localhost:8600/v1/ops/run -H 'Authorization: Bearer sk_ops_demo' \
   -H 'Content-Type: application/json' -d '{"force":true}'
 ```
 

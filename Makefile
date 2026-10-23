@@ -3,7 +3,7 @@
 COMPOSE ?= docker compose
 PG_TEST_URL ?= postgresql+psycopg://ach:ach@localhost:$${ACH_DB_HOST_PORT:-5433}/ach
 
-up: ## Build and start the local stack (UI :8080, API :8000)
+up: ## Build and start the local stack (UI :8686, API :8600)
 	$(COMPOSE) up -d --build
 
 down: ## Stop the stack (keeps the database volume)

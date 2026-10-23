@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     scheduler_interval_seconds: int = 60
     itsm_webhook_url: str = ""               # ServiceNow / PagerDuty / JSM endpoint
     webhook_max_attempts: int = 6
-    cors_origins: str = "http://localhost:5173,http://localhost:8080"
+    cors_origins: str = "http://localhost:5173,http://localhost:8686"
 
     seed_demo_data: bool = True
 
